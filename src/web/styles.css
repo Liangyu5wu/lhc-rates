@@ -1,0 +1,83 @@
+:root {
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e6e5e1;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --critical: #d03b3b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --grid: #383835;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --critical: #e66767;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+main { max-width: 900px; margin: 0 auto; padding: 28px 20px 40px; }
+h1 { margin: 0; font-size: 1.5rem; font-weight: 600; }
+.sub { margin: 4px 0 20px; color: var(--ink-2); }
+
+form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; color: var(--ink-2); }
+.unit { color: var(--muted); }
+.pair { display: flex; gap: 4px; }
+.pair input { min-width: 0; flex: 1; }
+
+input, select, button {
+  font: inherit;
+  padding: 7px 9px;
+  border: 1px solid var(--grid);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+button { background: var(--series-1); border-color: var(--series-1); color: #fff; cursor: pointer; }
+
+#error {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--critical);
+  background: var(--surface);
+  color: var(--ink);
+}
+#error::before { content: "⚠ "; color: var(--critical); }
+
+#results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+.tile { background: var(--surface); border-radius: 8px; padding: 12px 14px; }
+.tile .label { display: block; font-size: 0.8rem; color: var(--ink-2); }
+.tile .label i { color: var(--muted); font-style: normal; }
+.tile .value { display: block; margin-top: 4px; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+
+#plot { margin-top: 16px; height: 380px; background: var(--surface); border-radius: 8px; }
+.constants { margin-top: 10px; font-size: 0.8rem; color: var(--muted); }
+
+@media (max-width: 720px) {
+  form { grid-template-columns: 1fr 1fr; }
+  #results { grid-template-columns: 1fr; }
+}

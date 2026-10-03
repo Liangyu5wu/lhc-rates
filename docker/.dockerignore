@@ -1,0 +1,2 @@
+# The build context is docker/; only the manifests and locks are needed.
+node_modules/

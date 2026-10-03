@@ -1,0 +1,8 @@
+{
+  "name": "lhc-rates-web",
+  "private": true,
+  "description": "Frontend libraries, installed into the image at build time. After changing this file, run `make lock` and commit both files.",
+  "dependencies": {
+    "plotly.js-dist-min": "^3.0.0"
+  }
+}
