@@ -6,14 +6,14 @@ changes. The rules that apply to every task are in AGENTS.md.
 
 ## Current state
 
-Nothing is built yet. The repository holds only its standing documents
-(README.md, AGENTS.md, CLAUDE.md, PROMPT.md and this file) and a
-`.gitignore`. There is no container, no Makefile and no code.
+Built, following the specification below:
 
-Everything else in this file is the specification to build from: the
-container, the Makefile and its targets, the backend and the page. When the
-first build lands, replace this section with what actually exists, and keep
-it true from then on.
+- `docker/`: the four stages (uv tools, Node tools, frontend libraries, final image), with `compose.yaml` publishing on `127.0.0.1:8000`. The Python dependencies are FastAPI and uvicorn, with pytest, httpx and ruff for development. The one frontend library is Plotly (`plotly.js-dist-min`), chosen for its log-log axes and hover; it is served from `/vendor/`.
+- Makefile: every target in the three groups below.
+- One API endpoint, `GET /api/rates`, with one pipeline, `compute_rates()` in `src/app/pipeline.py`. The physics is pure functions in `src/app/physics.py`. `src/app/smoke.py` is run by `make smoke`.
+- `src/web/`: one page with four inputs, three result tiles and the mu(L) plot.
+- `tests/`: the truths in PROMPT.md (`test_physics.py`) and the API contract (`test_api.py`).
+- No `data/` and no `docs/` entries: the app has no dataset, and no decisions have been recorded yet.
 
 ## Stack
 
