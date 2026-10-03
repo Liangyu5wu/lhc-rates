@@ -70,3 +70,10 @@ Each test was seen to fail on a deliberately injected bug before it passed:
 
 - The constants (f_rev, σ_inel, the 3564 bunch slots) were checked by the author from domain knowledge, not against a cited source.
 - The page has no automated browser tests. The smoke check confirms only that the page and Plotly are served.
+  The author checked the page by hand on 2026-10-03, and all of these matched the expected values:
+  - the defaults (μ ≈ 59.3);
+  - the nominal point (μ ≈ 25.3);
+  - the HL-LHC point (μ ≈ 193);
+  - 1 mb against 10⁹ pb;
+  - n_b halved, which doubles μ;
+  - the error messages for n_b = 0, 3565 and 2.5, for L = abc and −1, and for an empty σ, each of which clears the plot.
