@@ -1,0 +1,21 @@
+# Python dependencies of the development container (not an installable
+# package). After changing this file, run `make lock` and commit both files.
+[project]
+name = "lhc-rates"
+version = "0.1.0"
+description = "Environment for the LHC Rate Calculator."
+requires-python = ">=3.14,<3.15"
+dependencies = [
+  "fastapi>=0.115",  # the API, with typed models and /docs
+  "uvicorn>=0.32",   # serves it
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4",  # tests
+  "httpx>=0.28",  # FastAPI's TestClient needs it
+  "ruff>=0.13",   # lint and format
+]
+
+[tool.uv]
+package = false

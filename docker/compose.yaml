@@ -1,0 +1,42 @@
+# Run through the Makefile only; it sets COMPOSE_PROJECT_NAME and the user IDs.
+services:
+  app:
+    build:
+      context: .
+      target: final
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /work
+    volumes:
+      - ..:/work
+    environment:
+      HOME: /tmp/home
+    ports:
+      - "127.0.0.1:8000:8000"
+    init: true
+
+  # Tool stages used by `make lock`; they write the lock files into docker/.
+  lock-py:
+    profiles: [tools]
+    build:
+      context: .
+      target: tools
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /deps
+    volumes:
+      - .:/deps
+    environment:
+      HOME: /tmp/home
+    command: ["uv", "lock"]
+
+  lock-js:
+    profiles: [tools]
+    build:
+      context: .
+      target: node-tools
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /deps
+    volumes:
+      - .:/deps
+    environment:
+      HOME: /tmp/home
+    command: ["npm", "install", "--package-lock-only", "--no-audit", "--no-fund"]
